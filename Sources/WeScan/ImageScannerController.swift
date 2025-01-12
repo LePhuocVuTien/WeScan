@@ -156,6 +156,10 @@ public struct ImageScannerScan {
     }
 
     public var image: UIImage
+    
+    public init(image: UIImage) {
+        self.image = image
+    }
 
     public func generatePDFData(completion: @escaping (Result<Data, ImageScannerError>) -> Void) {
         DispatchQueue.global(qos: .userInteractive).async {
@@ -168,7 +172,7 @@ public struct ImageScannerScan {
 
     }
 
-    mutating func rotate(by rotationAngle: Measurement<UnitAngle>) {
+    public mutating func rotate(by rotationAngle: Measurement<UnitAngle>) {
         guard rotationAngle.value != 0, rotationAngle.value != 360 else { return }
         image = image.rotated(by: rotationAngle) ?? image
     }
